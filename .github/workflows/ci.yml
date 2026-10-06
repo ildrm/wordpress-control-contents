@@ -1,0 +1,54 @@
+name: Quality checks
+on: [push, pull_request]
+permissions:
+  contents: read
+jobs:
+  php:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        php: ['8.2', '8.3', '8.4']
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          extensions: intl, mbstring, dom
+          coverage: none
+      - run: composer install --no-interaction --prefer-dist
+      - run: composer test
+      - run: composer analyse
+      - run: composer lint
+      - run: composer audit
+      - run: composer evaluate
+  wordpress:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+          extensions: intl, mbstring, dom
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - run: composer install --no-interaction --prefer-dist
+      - run: npm ci --ignore-scripts
+      - run: npx playwright install --with-deps chromium
+      - run: docker compose -f tools/compose.yaml up -d --build
+      - run: |
+          for i in $(seq 1 30); do
+            if docker compose -f tools/compose.yaml exec -T wordpress test -f /var/www/html/wp-load.php; then break; fi
+            sleep 2
+          done
+          docker compose -f tools/compose.yaml exec -T wordpress php /var/www/html/wp-content/plugins/universal-content-moderation/tools/install-test.php
+      - run: docker compose -f tools/compose.yaml exec -T wordpress php /var/www/html/wp-content/plugins/universal-content-moderation/tools/integration.php
+      - run: docker compose -f tools/compose.yaml exec -T wordpress php /var/www/html/wp-content/plugins/universal-content-moderation/tools/review-integration.php
+      - run: docker compose -f tools/compose.yaml exec -T wordpress php /var/www/html/wp-content/plugins/universal-content-moderation/tools/admin-review.php
+      - run: docker compose -f tools/compose.yaml exec -T wordpress php /var/www/html/wp-content/plugins/universal-content-moderation/tools/shadow-review.php
+      - run: npm run test:e2e
+      - run: composer package
+      - run: docker compose -f tools/compose.yaml exec -T wordpress php /var/www/html/wp-content/plugins/universal-content-moderation/tools/lifecycle-test.php
+      - if: always()
+        run: docker compose -f tools/compose.yaml down -v

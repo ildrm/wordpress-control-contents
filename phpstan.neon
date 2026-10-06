@@ -1,0 +1,10 @@
+parameters:
+    level: 6
+    treatPhpDocTypesAsCertain: false
+    paths:
+        - src
+    bootstrapFiles:
+        - vendor/php-stubs/wordpress-stubs/wordpress-stubs.php
+        - tools/phpstan-bootstrap.php
+    ignoreErrors:
+        - identifier: missingType.iterableValue

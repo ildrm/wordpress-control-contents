@@ -1,0 +1,63 @@
+{
+    "scope": "Synthetic regression fixtures only. Contains sentinel prohibited terms, not a representative abuse corpus.",
+    "production_accuracy_established": false,
+    "hard_block_release_gate": "NOT SATISFIED: no representative validation corpus",
+    "metrics": {
+        "en": {
+            "tp": 4,
+            "tn": 4,
+            "fp": 0,
+            "fn": 0,
+            "precision": 1,
+            "recall": 1,
+            "f1": 1,
+            "fpr": 0,
+            "fnr": 0
+        },
+        "all": {
+            "tp": 11,
+            "tn": 9,
+            "fp": 0,
+            "fn": 0,
+            "precision": 1,
+            "recall": 1,
+            "f1": 1,
+            "fpr": 0,
+            "fnr": 0
+        },
+        "fa": {
+            "tp": 3,
+            "tn": 3,
+            "fp": 0,
+            "fn": 0,
+            "precision": 1,
+            "recall": 1,
+            "f1": 1,
+            "fpr": 0,
+            "fnr": 0
+        },
+        "ar": {
+            "tp": 2,
+            "tn": 1,
+            "fp": 0,
+            "fn": 0,
+            "precision": 1,
+            "recall": 1,
+            "f1": 1,
+            "fpr": 0,
+            "fnr": 0
+        },
+        "mixed": {
+            "tp": 2,
+            "tn": 1,
+            "fp": 0,
+            "fn": 0,
+            "precision": 1,
+            "recall": 1,
+            "f1": 1,
+            "fpr": 0,
+            "fnr": 0
+        }
+    },
+    "failed_sample_ids": []
+}

@@ -1,0 +1,36 @@
+name: uwcmp-development-tests
+services:
+  db:
+    image: mariadb:11.4
+    environment:
+      MARIADB_DATABASE: uwcmp_test
+      MARIADB_USER: uwcmp_test
+      MARIADB_PASSWORD: isolated-development-only
+      MARIADB_ROOT_PASSWORD: isolated-root-only
+    tmpfs:
+      - /var/lib/mysql
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 5s
+      timeout: 5s
+      retries: 30
+  wordpress:
+    build:
+      context: docker
+      args:
+        WORDPRESS_TAG: ${UWCMP_WORDPRESS_TAG:-6.9.4-php8.2-apache}
+    environment:
+      UWCMP_INTEGRATION_TEST: "1"
+      WORDPRESS_DB_HOST: db
+      WORDPRESS_DB_NAME: uwcmp_test
+      WORDPRESS_DB_USER: uwcmp_test
+      WORDPRESS_DB_PASSWORD: isolated-development-only
+      WORDPRESS_DEBUG: "1"
+      WORDPRESS_CONFIG_EXTRA: "define('WP_DEBUG_LOG', true); define('WP_ENVIRONMENT_TYPE', 'development');"
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+      - "127.0.0.1:8876:80"
+    volumes:
+      - ../:/var/www/html/wp-content/plugins/universal-content-moderation:ro

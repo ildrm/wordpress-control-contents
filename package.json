@@ -1,0 +1,7 @@
+{
+  "name": "uwcmp-development-tests",
+  "private": true,
+  "description": "Browser and accessibility tests; no production JavaScript dependencies",
+  "scripts": {"test:e2e": "playwright test"},
+  "devDependencies": {"@playwright/test": "1.63.0", "@axe-core/playwright": "4.13.0"}
+}

@@ -1,0 +1,9 @@
+/vendor/
+/node_modules/
+/.phpunit.cache/
+/build/
+/.wp-env/
+/coverage/
+/test-results/
+/playwright-report/
+*.log

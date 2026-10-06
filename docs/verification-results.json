@@ -1,0 +1,118 @@
+{
+  "date": "2026-10-06",
+  "status": "development_checkpoint_not_production_ready",
+  "phpunit": {
+    "tests": 75,
+    "assertions": 471,
+    "passed_runtimes": [
+      "8.5.8",
+      "8.2.34"
+    ]
+  },
+  "wordpress_integration": [
+    {
+      "wordpress": "6.9.4",
+      "php": "8.2.31",
+      "mariadb": "11.4.13",
+      "assertions": 30,
+      "passed": true
+    },
+    {
+      "wordpress": "7.1.2",
+      "php": "8.2.34",
+      "mariadb": "11.4.13",
+      "assertions": 34,
+      "passed": true
+    }
+  ],
+  "browser": {
+    "tool": "Playwright 1.63.0 / installed Chrome",
+    "tests": 6,
+    "wordpress_versions": [
+      "7.1.2"
+    ],
+    "passed": true,
+    "accessibility": "axe scoped A/AA, keyboard/desktop RTL and 320-pixel RTL; full conformance unproven"
+  },
+  "static_analysis": {
+    "phpstan_level": 6,
+    "errors": 0,
+    "wpcs_errors": 0,
+    "wpcs_warnings": 0
+  },
+  "plugin_check": {
+    "version": "2.1.0",
+    "scope": "packaged runtime with all default checks and CLI runtime bootstrap; canonical slug",
+    "result": "Success: Checks complete. No errors found.",
+    "review_recheck": "passed"
+  },
+  "lifecycle": {
+    "wordpress_versions": [
+      "6.9.4",
+      "7.1.2"
+    ],
+    "passed": [
+      "activation",
+      "idempotent schema",
+      "deactivation",
+      "retained uninstall",
+      "opt-in single-site deletion"
+    ],
+    "unverified": [
+      "older-version upgrade",
+      "rollback",
+      "multisite lifecycle"
+    ],
+    "review_recheck": "passed",
+    "review_checks": [
+      "both retention schedules cleared",
+      "default retained uninstall",
+      "failed deletion preserves marker/capabilities",
+      "retry deletes owned tables/metadata/capabilities"
+    ]
+  },
+  "dependency_audit": {
+    "composer_advisories": 0,
+    "composer_abandoned": 0,
+    "npm_reported_vulnerabilities": 0
+  },
+  "accuracy": {
+    "synthetic_samples": 20,
+    "passed": true,
+    "representative_accuracy_established": false,
+    "hard_block_gate_satisfied": false
+  },
+  "benchmarks": "benchmark-results.json; engine only, 32 cases, compilation and memory separate",
+  "unverified": [
+    "full product scope",
+    "meaningful coverage percentage",
+    "remote CI",
+    "PHP 8.3/8.4",
+    "minimum WP 6.8",
+    "MySQL",
+    "persistent object cache",
+    "multisite",
+    "third-party integrations",
+    "manual security/privacy/a11y/RTL review",
+    "WordPress request overhead"
+  ],
+  "review": {
+    "date": "2026-10-06",
+    "report": "REVIEW-FIXES.md",
+    "wordpress": "7.1.2",
+    "php": "8.2.34",
+    "mariadb": "11.4.13",
+    "base_integration_assertions": 34,
+    "review_integration_assertions": 30,
+    "admin_schema_retention_checks": 9,
+    "native_shadow_checks": 3,
+    "passed": true
+  },
+  "historical_note": "WordPress 6.9.4 results predate the review changes.",
+  "source_graph": {
+    "nodes": 890,
+    "edges": 2238,
+    "scope": "13 cited paths and src/tests/tools; no recorded coverage/freshness issue",
+    "caveat": "best-effort signal, not proof of completeness"
+  }
+}

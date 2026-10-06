@@ -1,0 +1,9 @@
+# Moderation accuracy
+
+Run `composer evaluate` or `php tools/evaluate.php --write`. The current 20 synthetic sentinel examples contain 11 positives and 9 negatives across English, Persian, Arabic and mixed-script strings. All pass; per-language confusion matrices, precision, recall, F1, FPR and FNR are in accuracy-results.json. These fixtures exercise implementation regression behavior only. They are not representative abuse data and cannot establish production accuracy, calibrated confidence or the 99.5% hard-block precision target.
+
+Canonical detection uses Unicode NFKC and case folding, Arabic/Persian letters/digits, diacritic/tatweel handling and explicit boundaries. ZWNJ and zero-width space become word separators; they are not globally deleted. Lossy leetspeak, selected homoglyphs, repeated letters and separated-letter transformations operate on an evasion representation. Evidence records the representation and analysis byte offset. Canonical confidence 1.0 means exact normalized match, not proven semantic policy violation. Evasion confidence 0.7 is an engineering marker, not a calibrated probability.
+
+Exceptions are term-specific phrases covering the matching occurrence with word boundaries. They do not allowlist the whole submission and cannot suppress another term. Existing occurrences outside an exception still trigger. Whole-word matching avoids suffixes such as badwordsuffix; explicit partial/prefix/suffix modes change that behavior only when requested.
+
+All destructive actions, including rejection, redaction and suspension, route to human review in this preview. Shadow mode records proposed review without changing status. Representative labeled corpora, slang/Finglish dictionaries, ambiguous conversational context, annotation protocol, inter-rater agreement, per-category data, holdout evaluation and false-positive review workflow remain required. Real language detection is absent; script labels are not language labels.

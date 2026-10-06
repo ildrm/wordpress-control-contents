@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<ruleset name="UWCMP">
+  <description>WordPress Core/Extra; ADR 0001 documents modern PSR-4 conventions.</description>
+  <file>src</file><file>universal-content-moderation.php</file><file>autoload.php</file><file>uninstall.php</file>
+  <arg name="extensions" value="php"/><arg value="sp"/>
+  <rule ref="WordPress-Core">
+    <exclude name="WordPress.WP.CapitalPDangit"/>
+    <exclude name="WordPress.Files.FileName"/>
+    <exclude name="WordPress.PHP.YodaConditions"/>
+    <exclude name="WordPress.Arrays.ArrayDeclarationSpacing"/>
+    <exclude name="Universal.Arrays.DisallowShortArraySyntax"/>
+    <exclude name="WordPress.WhiteSpace.ControlStructureSpacing"/>
+  </rule>
+  <rule ref="WordPress-Extra">
+    <exclude name="WordPress.WP.CapitalPDangit"/>
+    <exclude name="WordPress.Files.FileName"/>
+    <exclude name="WordPress.PHP.YodaConditions"/>
+    <exclude name="Squiz.Commenting"/>
+    <exclude name="WordPress.Arrays.ArrayDeclarationSpacing"/>
+    <exclude name="Universal.Arrays.DisallowShortArraySyntax"/>
+    <exclude name="WordPress.WhiteSpace.ControlStructureSpacing"/>
+    <exclude name="Universal.Operators.DisallowShortTernary"/>
+  </rule>
+  <rule ref="WordPress.WP.Capabilities">
+    <properties><property name="custom_capabilities" type="array">
+      <element value="uwcmp_view_moderation"/>
+      <element value="uwcmp_moderate"/>
+      <element value="uwcmp_view_sensitive"/>
+      <element value="uwcmp_edit_policies"/>
+      <element value="uwcmp_manage_integrations"/>
+      <element value="uwcmp_suspend_users"/>
+      <element value="uwcmp_export"/>
+      <element value="uwcmp_manage_providers"/>
+      <element value="uwcmp_view_audit"/>
+      <element value="uwcmp_administer"/>
+    </property></properties>
+  </rule>
+  <rule ref="WordPress.WP.AlternativeFunctions.json_encode_json_encode">
+    <exclude-pattern>src/Application/*</exclude-pattern>
+    <exclude-pattern>src/Infrastructure/*</exclude-pattern>
+  </rule>
+</ruleset>

@@ -1,0 +1,26 @@
+{
+  "description": "Synthetic regression fixtures only. Contains sentinel prohibited terms, not a representative abuse corpus.",
+  "terms": [{"id":"en-sentinel","text":"badword"},{"id":"fa-sentinel","text":"عبارت ممنوع"},{"id":"ar-sentinel","text":"مصطلح محظور"}],
+  "samples": [
+    {"text":"A helpful and civil discussion.","language":"en","violation":false},
+    {"text":"notbadword is an unrelated identifier","language":"en","violation":false},
+    {"text":"badwordsuffix","language":"en","violation":false},
+    {"text":"Scunthorpe and classic examples","language":"en","violation":false},
+    {"text":"Use BADWORD here","language":"en","violation":true},
+    {"text":"b.a.d.w.o.r.d","language":"en","violation":true},
+    {"text":"b@dw0rd","language":"en","violation":true},
+    {"text":"baaaaadword","language":"en","violation":true},
+    {"text":"سلام، گفتگوی محترمانه","language":"fa","violation":false},
+    {"text":"عبارت ممنوعه با پسوند","language":"fa","violation":false},
+    {"text":"يك كتاب مفيد","language":"fa","violation":false},
+    {"text":"عبارت ممنوع","language":"fa","violation":true},
+    {"text":"عبارت‌ممنوع","language":"fa","violation":true},
+    {"text":"عبارت مَمْنوع","language":"fa","violation":true},
+    {"text":"حديث مهذب ومحترم","language":"ar","violation":false},
+    {"text":"مصطلح محظور","language":"ar","violation":true},
+    {"text":"مُصْطَلَح مَحْظور","language":"ar","violation":true},
+    {"text":"سلام world","language":"mixed","violation":false},
+    {"text":"سلام badword دنیا","language":"mixed","violation":true},
+    {"text":"bаdword","language":"mixed","violation":true}
+  ]
+}

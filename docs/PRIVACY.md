@@ -1,0 +1,11 @@
+# Privacy
+
+All implemented processing runs locally in PHP on the WordPress host. There are no AI providers, cloud connections, remote reputation requests, telemetry or external processors in this slice. Original submission text remains in WordPress storage; temporary normalization/evidence representations live in request memory. Moderation never rewrites original text in this preview.
+
+Audit stores actor ID, object type/ID for acknowledged decisions, policy/rule/term identifiers, category/field/confidence, score, mode, action, source and duration. It omits raw submission text, IP, email, user agent, normalized text and matched excerpts. Policy snapshots retain administrator-defined dictionary text. The object cache may hold compiled dictionaries/policies, not submission content. Events expire after 30 days via bounded cron batches and backlog continuations; unreliable WP-Cron can still delay cleanup. Temporary comment correlation UUIDs are normally removed after synchronous completion; an interrupted request can leave a token, removed by explicit opt-in uninstall.
+
+WordPress personal-data export uses registered account email lookup and bounded event and policy-authorship pages. Erasure removes actor IDs/object references/metadata from that actor's events and clears snapshot creator IDs. Repeated erasure calls drain up to 100 events and 100 creators each time. Anonymous subjects cannot currently be identified for export/erasure because no email/IP is stored; anonymous object-based erasure and wider retention controls remain required. Policy snapshots and aggregate operation fields remain after pseudonymization. Backups and external hosting/cache retention are controlled by the site operator.
+
+Uninstall preserves data by default. Explicit single-site deletion is documented in DATABASE.md. Private-message moderation, raw evidence preservation and external processing must remain disabled until consent/disclosure, field minimization, encryption/retention and erasure behavior are implemented and tested. This document describes current data flows; it is not a legal compliance claim.
+
+Privacy database failures return WordPress errors for retry. A late audit completion cannot reattach an actor reference erased while its attempt was in flight.
